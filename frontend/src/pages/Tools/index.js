@@ -12,7 +12,7 @@ export default function Tools() {
   }
   useEffect(function effectFunction() {
     async function fetchTools() {
-      const response = await api.get("/");
+      const response = await api.get("/tools");
       setTools(response.data);
     }
     fetchTools();

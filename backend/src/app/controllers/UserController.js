@@ -1,80 +1,80 @@
-import "../models/tool";
+import "../models/User";
 import mongoose from "mongoose";
-const Tool = mongoose.model("Tool");
+const User = mongoose.model("User");
 
-class ToolController {
+class UserController {
   async store(request, response) {
-    Tool.find({})
-      .then((tool) => {
-        return response.json(tool);
+    User.find({})
+      .then((user) => {
+        return response.json(user);
       })
       .catch((err) => {
         return response.status(400).json({
           error: true,
-          message: "Nenhuma ferramenta encontrado",
+          message: "Nenhum usuário encontrado.",
         });
       });
   }
   async show(request, response) {
-    Tool.findOne({ _id: request.params.id })
-      .then((tool) => {
-        response.json(tool);
+    User.findOne({ _id: request.params.id })
+      .then((user) => {
+        response.json(user);
       })
       .catch((err) => {
         return response.status(400).json({
           error: true,
-          message: "Nenhum ferramenta encontrada.",
+          message: "Nenhum usuário encontrado.",
         });
       });
   }
   async create(request, response) {
-    const tool = Tool.create(request.body, (err) => {
+    const user = User.create(request.body, (err) => {
       if (err) {
         return response.status(400).json({
           error: true,
-          message: "Erro. Ferramenta não foi cadastrada com sucesso.",
+          message: "Erro. Usuário não foi cadastrado com sucesso.",
         });
       }
       return response.status(200).json({
         error: false,
-        message: "Ferramenta foi cadastrada com sucesso.",
+        message: "Usuário foi cadastrado com sucesso.",
       });
     });
   }
   async edit(request, response) {
-    const tool = Tool.updateOne(
+    const user = User.updateOne(
       { _id: request.params.id },
       request.body,
       (err) => {
         if (err)
           return response.status(400).json({
             error: true,
-            message: "Nao foi possivel editar a ferramenta",
+            message: "Não foi possivel editar o usuário",
           });
 
         response.status(200).json({
           error: true,
-          message: "Ferramenta editada com sucesso",
+          message: "Usuário editado com sucesso",
         });
       }
     );
   }
   async delete(request, response) {
-    Tool.deleteOne({ _id: request.params.id }).then(() => {
+    User.deleteOne({ _id: request.params.id }).then(() => {
       response
         .status(200)
         .json({
           error: false,
-          message: "Ferramenta deletada com sucesso",
+          message: "Usuário deletado com sucesso",
         })
         .catch((err) => {
           response.status(400).json({
             error: true,
-            message: "Falha ao deletar ferramenta",
+            message: "Falha ao deletar usuário",
           });
         });
     });
   }
 }
 
-module.exports = new ToolController();
+module.exports = new UserController();

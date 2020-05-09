@@ -1,21 +1,18 @@
 import mongoose from "mongoose";
 
-const Tool = new mongoose.Schema(
+const User = new mongoose.Schema(
   {
-    title: {
+    name: {
       type: String,
       required: true,
     },
-    link: {
+    email: {
       type: String,
       required: true,
     },
-    description: {
+    password_hash: {
       type: String,
       required: true,
-    },
-    tags: {
-      type: [String],
     },
   },
   {
@@ -23,4 +20,4 @@ const Tool = new mongoose.Schema(
   }
 );
 
-mongoose.model("Tool", Tool);
+mongoose.model("User", User);
